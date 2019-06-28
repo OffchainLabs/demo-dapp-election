@@ -101,12 +101,12 @@ aproba@^1.0.3:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
 
-"arb-truffle-provider@https://github.com/OffchainLabs/arb-truffle-provider.git":
-  version "1.0.0"
-  resolved "https://github.com/OffchainLabs/arb-truffle-provider.git#160a5a48d363fb04ce9b66722b0010649ed13d9b"
+"arb-truffle-provider@https://github.com/OffchainLabs/arb-truffle-provider.git#v0.1.1":
+  version "0.1.1"
+  resolved "https://github.com/OffchainLabs/arb-truffle-provider.git#7e3da0ed51736fd1977b4ff990c15da422ddf559"
   dependencies:
     callsite "^1.0.0"
-    ganache-core "^2.5.3"
+    ganache-core "^2.5.5"
 
 are-we-there-yet@~1.1.2:
   version "1.1.5"
@@ -2011,13 +2011,17 @@ eth-query@^2.0.2, eth-query@^2.1.0, eth-query@^2.1.2:
     json-rpc-random-id "^1.0.0"
     xtend "^4.0.1"
 
-eth-sig-util@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/eth-sig-util/-/eth-sig-util-2.0.2.tgz#bfdb274293620404b7631019dc3d7f17bb2e06f4"
-  integrity sha512-tB6E8jf/aZQ943bo3+iojl8xRe3Jzcl+9OT6v8K7kWis6PdIX19SB2vYvN849cB9G9m/XLjYFK381SgdbsnpTA==
+eth-sig-util@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/eth-sig-util/-/eth-sig-util-2.1.2.tgz#9b357395b5ca07fae6b430d3e534cf0a0f1df118"
+  integrity sha512-bNgt7txkEmaNlLf+PrbwYIdp4KRkB3E7hW0/QwlBpgv920pVVyQnF0evoovfiRveNKM4OrtPYZTojjmsfuCUOw==
   dependencies:
+    buffer "^5.2.1"
+    elliptic "^6.4.0"
     ethereumjs-abi "0.6.5"
     ethereumjs-util "^5.1.1"
+    tweetnacl "^1.0.0"
+    tweetnacl-util "^0.15.0"
 
 eth-sig-util@^1.4.2:
   version "1.4.2"
@@ -2545,10 +2549,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-ganache-core@^2.5.3:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/ganache-core/-/ganache-core-2.5.5.tgz#84da56de1957b6200a2d02934853fe7af89d260b"
-  integrity sha512-mrvPCtDjFLWmqygCx6LngWfA1hv6DH+iisEVYxRmCujstcMgzqi5UQdcKprxoO2Jx9st1fWVvDLi/tc6WHPGoA==
+ganache-core@^2.5.5:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/ganache-core/-/ganache-core-2.5.6.tgz#dd2ce3ec6e86930f8662cf4985c778cdf9b6ea79"
+  integrity sha512-Xvi5iOa8TQMbYCpWVrjnUHuBWFRZl1hJeNaxnytM2uh08elVXuKgcDdH8g7j1+r6WgW2FQmoowj4K/m/G999XA==
   dependencies:
     abstract-leveldown "3.0.0"
     async "2.6.1"
@@ -2558,7 +2562,7 @@ ganache-core@^2.5.3:
     clone "2.1.2"
     debug "3.1.0"
     encoding-down "5.0.4"
-    eth-sig-util "2.0.2"
+    eth-sig-util "2.1.2"
     ethereumjs-abi "0.6.5"
     ethereumjs-account "2.0.5"
     ethereumjs-block "2.1.0"
@@ -5531,10 +5535,20 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+tweetnacl-util@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/tweetnacl-util/-/tweetnacl-util-0.15.0.tgz#4576c1cee5e2d63d207fee52f1ba02819480bc75"
+  integrity sha1-RXbBzuXi1j0gf+5S8boCgZSAvHU=
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+
+tweetnacl@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-1.0.1.tgz#2594d42da73cd036bd0d2a54683dd35a6b55ca17"
+  integrity sha512-kcoMoKTPYnoeS50tzoqjPY3Uv9axeuuFAZY9M/9zFnhoVvRfxz9K29IMPD7jGmt2c8SW7i3gT9WqDl2+nV7p4A==
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"

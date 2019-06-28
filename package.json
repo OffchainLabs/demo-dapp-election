@@ -1,6 +1,6 @@
 {
   "name": "election",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "truffle.js",
   "directories": {
@@ -17,6 +17,6 @@
     "truffle": "5.0.20"
   },
   "dependencies": {
-    "arb-truffle-provider": "https://github.com/OffchainLabs/arb-truffle-provider.git"
+    "arb-truffle-provider": "https://github.com/OffchainLabs/arb-truffle-provider.git#v0.1.1"
   }
 }
