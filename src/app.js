@@ -1,6 +1,10 @@
+const Web3 = require('web3');
+const contracts = require('truffle-contract');
+const ArbProvider = require('arb-web3-provider');
+
 App = {
   web3Provider: null,
-  contracts: {},
+  contracts: contracts,
   account: '0x0',
   hasVoted: false,
 
@@ -9,54 +13,49 @@ App = {
   },
 
   initWeb3: async function() {
-    var standardWeb3 = null;
+    // Modern dapp browsers...
     if (window.ethereum) {
-        standardWeb3 = new Web3(ethereum);
-        try {
-            // Request account access if needed
-            await ethereum.enable();
-        } catch (error) {
-          console.log("User denied account access")
-        }
-    } else if (window.web3) {
-        // Legacy dapp browsers...
-        standardWeb3 = new Web3(web3.currentProvider);
+      App.web3Provider = window.ethereum;
+      try {
+        // Request account access
+        await window.ethereum.enable();
+      } catch (error) {
+        // User denied account access...
+        console.error("User denied account access")
+      }
     }
-    // Non-dapp browsers...
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = window.web3.currentProvider;
+    }
+    // If no injected web3 instance is detected, fall back to Ganache
     else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
-    const contracts_promise = new Promise(function(resolve, reject) {
-      $.getJSON('compiled.json', function(data) {
-        resolve(data)
-      })
-      .fail(function (jqhr, textStatus, error) {
-        reject("Failed to load compiled.json. " + textStatus + ": " + error)
-      });
-    });
-    const contracts = await contracts_promise;
 
-    let arbProvider = new ArbProvider(
+    const contracts = require('../compiled.json');
+    App.web3Provider = new ArbProvider(
       'http://localhost:1235',
       contracts,
-      standardWeb3.currentProvider
+      App.web3Provider
     );
-    App.web3Provider = arbProvider;
-    web3 = new Web3(arbProvider)
+    web3 = new Web3(App.web3Provider);
+    var version = web3.version.api;
+    console.log(version); // "0.2.0"
+
     return App.initContract();
   },
 
   initContract: function() {
-    $.getJSON("Election.json", function(election) {
-      // Instantiate a new truffle contract from the artifact
-      App.contracts.Election = TruffleContract(election);
-      // Connect provider to interact with contract
-      App.contracts.Election.setProvider(App.web3Provider);
+    const election = require('../build/contracts/Election.json');
+    // Instantiate a new truffle contract from the artifact
+    App.contracts.Election = TruffleContract(election);
+    // Connect provider to interact with contract
+    App.contracts.Election.setProvider(App.web3Provider);
 
-      App.listenForEvents();
+    App.listenForEvents();
 
-      return App.render();
-    });
+    return App.render();
   },
 
   // Listen for events emitted from the contract
@@ -106,7 +105,7 @@ App = {
       return electionInstance.candidatesCount();
     }).then(function(candidatesCount) {
       console.log("Count is", candidatesCount.toString())
-      
+
       var candidateFutures = [];
       for (var i = web3.toBigNumber(1); i.lte(candidatesCount); i = i.add(1)) {
         candidateFutures.push(electionInstance.candidates(i))
