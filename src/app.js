@@ -1,10 +1,10 @@
 const Web3 = require('web3');
-const contracts = require('truffle-contract');
+const contract = require('truffle-contract');
 const ArbProvider = require('arb-web3-provider');
 
 App = {
   web3Provider: null,
-  contracts: contracts,
+  contracts: {},
   account: '0x0',
   hasVoted: false,
 
@@ -49,7 +49,7 @@ App = {
   initContract: function() {
     const election = require('../build/contracts/Election.json');
     // Instantiate a new truffle contract from the artifact
-    App.contracts.Election = TruffleContract(election);
+    App.contracts.Election = contract(election);
     // Connect provider to interact with contract
     App.contracts.Election.setProvider(App.web3Provider);
 
