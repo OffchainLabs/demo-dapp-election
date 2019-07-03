@@ -40,8 +40,6 @@ App = {
       App.web3Provider
     );
     web3 = new Web3(App.web3Provider);
-    var version = web3.version.api;
-    console.log(version); // "0.2.0"
 
     return App.initContract();
   },
